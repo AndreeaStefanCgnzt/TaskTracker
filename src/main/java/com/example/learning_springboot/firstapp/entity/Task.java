@@ -12,8 +12,12 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String title;
+
     private String description;
+
+    @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'In Progress...'")
     private String status;
 
     @ManyToOne
@@ -77,5 +81,5 @@ public class Task {
             this.assignedUser.setId(userId);
         }
     }
-    
+
 }

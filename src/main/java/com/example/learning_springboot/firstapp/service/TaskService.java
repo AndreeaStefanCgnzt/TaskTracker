@@ -16,6 +16,10 @@ public class TaskService {
     }
 
     public Task createTask(Task task){
+        if(taskRepository.existsByTitle(task.getTitle())){
+            throw new RuntimeException("Task title already exists!");
+        }
+        
         return taskRepository.save(task);
     }
 
