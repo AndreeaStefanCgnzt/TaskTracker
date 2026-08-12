@@ -9,6 +9,8 @@ import com.example.learning_springboot.firstapp.entity.User;
 import com.example.learning_springboot.firstapp.entity.Task;
 import com.example.learning_springboot.firstapp.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -19,7 +21,7 @@ public class UserController {
     }
     
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user){
         return ResponseEntity.ok(userService.createUser(user));
     }
 
@@ -39,10 +41,10 @@ public class UserController {
     }
 
     @PostMapping("/{id}/tasks")
-    public ResponseEntity<User> assignTaskToUser(@PathVariable Long id, @RequestBody Task task){
+    public ResponseEntity<User> assignTaskToUser(@PathVariable Long id, @Valid @RequestBody Task task){
         return ResponseEntity.ok(userService.assignTaskToUser(id, task));
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id){
         userService.deleteUser(id);

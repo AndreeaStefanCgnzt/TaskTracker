@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="tasks")
@@ -13,8 +15,12 @@ public class Task {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    @NotBlank(message = "Title is required")
     private String title;
 
+    @Column(nullable = false)
+    @NotBlank(message = "Description is required")
+    @Size(max = 500, message = "Description cannot exceed 500 characters")
     private String description;
 
     @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'In Progress...'")
