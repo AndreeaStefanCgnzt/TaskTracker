@@ -1,6 +1,7 @@
 package com.example.learning_springboot.firstapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
 
@@ -59,4 +60,22 @@ public class Task {
     public void setAssignedUser(User assignedUser) {
         this.assignedUser = assignedUser;
     }
+
+    @JsonProperty("userId")
+    public Long getUserId() {
+        if(this.assignedUser != null){
+            return this.assignedUser.getId();
+        }
+
+        return null;
+    }
+
+    @JsonProperty("userId")
+    public void setUserId(Long userId) {
+        if(userId != null){
+            this.assignedUser = new User();
+            this.assignedUser.setId(userId);
+        }
+    }
+    
 }
