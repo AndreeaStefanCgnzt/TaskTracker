@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.learning_springboot.firstapp.entity.User;
+import com.example.learning_springboot.firstapp.entity.Task;
 import com.example.learning_springboot.firstapp.repository.UserRepository;
 
 @Service
@@ -23,12 +24,8 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
     }
 
-    public User getUserByEmail(String email){
-        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found!"));
-    }
-
-    public List<User> getMajorUsers(){
-        return userRepository.findByAgeGreaterThan(18).orElseThrow(() -> new RuntimeException("There are no major users in this database"));
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
     }
 
     public User updateUser(Long id, User updatedUser){
@@ -36,18 +33,19 @@ public class UserService {
 
         currentUser.setUsername(updatedUser.getUsername());
         currentUser.setEmail(updatedUser.getEmail());
-        currentUser.setAge(updatedUser.getAge());
 
         return userRepository.save(currentUser);
     }
 
-    public User updateUserEmail(Long id, String email){
-        User currentUser = getUserById(id);
-        currentUser.setEmail(email);
+    public User assignTaskToUser(Long id, Task task){
+        User user = getUserById(id);
 
-        return userRepository.save(currentUser);
+        task.setAssignedUser(user);
+        user.getTasks().add(task);
+
+        return userRepository.save(user);
     }
-
+    
     public void deleteUser(Long id){
         if(getUserById(id) != null){
             userRepository.delete(getUserById(id));
