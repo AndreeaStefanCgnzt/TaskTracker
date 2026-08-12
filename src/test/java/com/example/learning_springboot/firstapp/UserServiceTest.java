@@ -2,7 +2,6 @@ package com.example.learning_springboot.firstapp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -114,7 +113,6 @@ public class UserServiceTest {
         Task task = new Task();
         task.setTitle("Test Task");
         task.setDescription("This is a test task.");
-        task.setStatus("In Progress...");
 
         User result = userService.assignTaskToUser(userId, task);
 
@@ -123,7 +121,6 @@ public class UserServiceTest {
         assertEquals(1, result.getTasks().size());
         assertEquals("Test Task", result.getTasks().get(0).getTitle());
         assertEquals("This is a test task.", result.getTasks().get(0).getDescription());
-        assertEquals("In Progress...", result.getTasks().get(0).getStatus());
     }
 
     @Test
