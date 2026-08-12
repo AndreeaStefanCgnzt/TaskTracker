@@ -1,5 +1,8 @@
 package com.example.learning_springboot.firstapp.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -11,7 +14,9 @@ public class User {
 
     private String username;
     private String email;
-    private int age;
+    
+    @OneToMany(mappedBy = "assignedUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -37,11 +42,11 @@ public class User {
         this.email = email;
     }
 
-    public int getAge() {
-        return age;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }
