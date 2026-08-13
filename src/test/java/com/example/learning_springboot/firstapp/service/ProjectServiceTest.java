@@ -1,4 +1,4 @@
-package com.example.learning_springboot.firstapp.services;
+package com.example.learning_springboot.firstapp.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -19,7 +19,6 @@ import com.example.learning_springboot.firstapp.entity.User;
 import com.example.learning_springboot.firstapp.repository.ProjectRepository;
 import com.example.learning_springboot.firstapp.repository.TaskRepository;
 import com.example.learning_springboot.firstapp.repository.UserRepository;
-import com.example.learning_springboot.firstapp.service.ProjectService;
 
 @ExtendWith(MockitoExtension.class)
 public class ProjectServiceTest {
