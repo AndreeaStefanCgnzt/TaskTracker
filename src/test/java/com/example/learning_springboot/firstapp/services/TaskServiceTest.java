@@ -1,4 +1,4 @@
-package com.example.learning_springboot.firstapp;
+package com.example.learning_springboot.firstapp.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

@@ -30,7 +30,7 @@ public class User {
 
     @ManyToMany(mappedBy = "users")
     @JsonIgnore
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();
 
     public Long getId() {
         return id;
