@@ -6,7 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.learning_springboot.firstapp.entity.User;
+import com.example.learning_springboot.firstapp.entity.Task;
 import com.example.learning_springboot.firstapp.service.UserService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/users")
@@ -18,7 +21,7 @@ public class UserController {
     }
     
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user){
         return ResponseEntity.ok(userService.createUser(user));
     }
 
@@ -27,14 +30,9 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<User> searchUserByEmail(@RequestParam String email){
-        return ResponseEntity.ok(userService.getUserByEmail(email));
-    }
-
-    @GetMapping("/major")
-    public ResponseEntity<List<User>> findMajorUsers(){
-        return ResponseEntity.ok(userService.getMajorUsers());
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers(){
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PutMapping("/{id}")
@@ -42,9 +40,9 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUser(id, user));
     }
 
-    @PutMapping("/{id}/modify")
-    public ResponseEntity<User> updateUserEmail(@PathVariable Long id, @RequestBody String email){
-        return ResponseEntity.ok(userService.updateUserEmail(id, email));
+    @PostMapping("/{id}/tasks")
+    public ResponseEntity<User> assignTaskToUser(@PathVariable Long id, @Valid @RequestBody Task task){
+        return ResponseEntity.ok(userService.assignTaskToUser(id, task));
     }
 
     @DeleteMapping("/{id}")

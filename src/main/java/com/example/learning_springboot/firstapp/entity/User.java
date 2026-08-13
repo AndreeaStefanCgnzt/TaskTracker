@@ -1,6 +1,11 @@
 package com.example.learning_springboot.firstapp.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="users")
@@ -9,9 +14,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
+    @NotBlank(message = "Username is required")
     private String username;
+    
+    @Column(nullable = false, unique = true)
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
     private String email;
-    private int age;
+    
+    @OneToMany(mappedBy = "assignedUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -37,11 +50,11 @@ public class User {
         this.email = email;
     }
 
-    public int getAge() {
-        return age;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }
