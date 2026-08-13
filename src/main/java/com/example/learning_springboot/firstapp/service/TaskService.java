@@ -50,8 +50,6 @@ public class TaskService {
     }
 
     public void deleteTask(Long id){
-        if(getTaskById(id) != null){
-            taskRepository.delete(getTaskById(id));
-        }
+        taskRepository.deleteById(getTaskById(id).getId());
     }
 }

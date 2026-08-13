@@ -96,7 +96,7 @@ public class TaskServiceTest {
 
         taskService.deleteTask(taskId);
 
-        verify(taskRepository).delete(task);
+        verify(taskRepository).deleteById(taskId);
     }
 
     @Test

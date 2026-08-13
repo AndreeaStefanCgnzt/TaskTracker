@@ -99,7 +99,7 @@ public class UserServiceTest {
 
         userService.deleteUser(userId);
 
-        verify(userRepository).delete(user);
+        verify(userRepository).deleteById(userId);
     }
 
     @Test

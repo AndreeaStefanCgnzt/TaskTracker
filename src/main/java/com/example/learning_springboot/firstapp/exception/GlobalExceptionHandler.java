@@ -1,4 +1,4 @@
-package com.example.learning_springboot.firstapp.controller;
+package com.example.learning_springboot.firstapp.exception;
 
 import java.util.HashMap;
 import java.util.Map;
