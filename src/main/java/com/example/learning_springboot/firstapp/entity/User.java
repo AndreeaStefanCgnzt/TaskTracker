@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="users")
@@ -33,7 +34,7 @@ public class User implements UserDetails{
     private String email;
 
     @Column(nullable = false)
-    @NotBlank(message = "Role is required")
+    @NotNull(message = "Role is required")
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
