@@ -1,4 +1,4 @@
-package com.example.learning_springboot.firstapp;
+package com.example.learning_springboot.firstapp.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -16,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.example.learning_springboot.firstapp.entity.Task;
 import com.example.learning_springboot.firstapp.entity.User;
 import com.example.learning_springboot.firstapp.repository.UserRepository;
-import com.example.learning_springboot.firstapp.service.UserService;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -96,7 +95,7 @@ public class UserServiceTest {
 
         userService.deleteUser(userId);
 
-        verify(userRepository).delete(user);
+        verify(userRepository).deleteById(userId);
     }
 
     @Test
