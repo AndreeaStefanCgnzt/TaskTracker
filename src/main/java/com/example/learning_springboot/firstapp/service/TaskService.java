@@ -19,7 +19,7 @@ public class TaskService {
         if(taskRepository.existsByTitle(task.getTitle())){
             throw new RuntimeException("Task title already exists!");
         }
-        
+
         return taskRepository.save(task);
     }
 
@@ -33,6 +33,10 @@ public class TaskService {
 
     public List<Task> getTasksByAssignedUserId(Long userId){
         return taskRepository.findTaskByAssignedUserId(userId).orElseThrow(() -> new RuntimeException("Tasks not found!"));
+    }
+
+    public List<Task> getTasksByProjectId(Long projectId){
+        return taskRepository.findTaskByProjectId(projectId).orElseThrow(() -> new RuntimeException("Tasks not found!"));
     }
 
     public Task updateTask(Long id, Task updatedTask){

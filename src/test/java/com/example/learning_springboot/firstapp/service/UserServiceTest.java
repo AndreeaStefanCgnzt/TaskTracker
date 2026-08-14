@@ -15,12 +15,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.learning_springboot.firstapp.entity.Task;
 import com.example.learning_springboot.firstapp.entity.User;
+import com.example.learning_springboot.firstapp.repository.TaskRepository;
 import com.example.learning_springboot.firstapp.repository.UserRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private TaskRepository taskRepository;
 
     @InjectMocks
     private UserService userService;
@@ -109,11 +113,15 @@ public class UserServiceTest {
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         when(userRepository.save(user)).thenReturn(user);
 
+        Long taskId = 1L;
         Task task = new Task();
+        task.setId(taskId);
         task.setTitle("Test Task");
         task.setDescription("This is a test task.");
 
-        User result = userService.assignTaskToUser(userId, task);
+        when(taskRepository.findById(taskId)).thenReturn(Optional.of(task));
+
+        User result = userService.assignTaskToUser(userId, task.getId());
 
         assertNotNull(result);
         assertEquals(userId, result.getId());

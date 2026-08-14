@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.learning_springboot.firstapp.entity.Task;
+import com.example.learning_springboot.firstapp.enums.Status;
 import com.example.learning_springboot.firstapp.repository.TaskRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -65,12 +66,12 @@ public class TaskServiceTest {
         existingTask.setId(taskId);
         existingTask.setTitle("Test Task");
         existingTask.setDescription("This is a test task.");
-        existingTask.setStatus("In Progress...");
+        existingTask.setStatus(Status.IN_PROGRESS);
 
         Task updatedTask = new Task();
         updatedTask.setTitle("Updated Task");
         updatedTask.setDescription("This is an updated task.");
-        updatedTask.setStatus("Completed");
+        updatedTask.setStatus(Status.FINISHED);
 
         when(taskRepository.findById(taskId)).thenReturn(Optional.of(existingTask));
         when(taskRepository.save(existingTask)).thenReturn(existingTask);

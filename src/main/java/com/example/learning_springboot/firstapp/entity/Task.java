@@ -1,5 +1,6 @@
 package com.example.learning_springboot.firstapp.entity;
 
+import com.example.learning_springboot.firstapp.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -23,13 +24,19 @@ public class Task {
     @Size(max = 500, message = "Description cannot exceed 500 characters")
     private String description;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'In Progress...'")
-    private String status;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User assignedUser;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    @JsonIgnore
+    private Project project;
 
     public Long getId() {
         return id;
@@ -55,11 +62,11 @@ public class Task {
         this.description = description;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -88,4 +95,28 @@ public class Task {
         }
     }
 
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    @JsonProperty("projectId")
+    public Long getProjectId() {
+        if(this.project != null){
+            return this.project.getId();
+        }
+
+        return null;
+    }
+
+    @JsonProperty("projectId")
+    public void setProjectId(Long projectId) {
+        if(projectId != null){
+            this.project = new Project();
+            this.project.setId(projectId);
+        }
+    }
 }

@@ -6,14 +6,17 @@ import org.springframework.stereotype.Service;
 
 import com.example.learning_springboot.firstapp.entity.User;
 import com.example.learning_springboot.firstapp.entity.Task;
+import com.example.learning_springboot.firstapp.repository.TaskRepository;
 import com.example.learning_springboot.firstapp.repository.UserRepository;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final TaskRepository taskRepository;
 
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository, TaskRepository taskRepository){
         this.userRepository = userRepository;
+        this.taskRepository = taskRepository;
     }
 
     public User createUser(User user){
@@ -43,8 +46,9 @@ public class UserService {
         return userRepository.save(currentUser);
     }
 
-    public User assignTaskToUser(Long id, Task task){
-        User user = getUserById(id);
+    public User assignTaskToUser(Long userId, Long taskId){
+        User user = getUserById(userId);
+        Task task = taskRepository.findById(taskId).orElseThrow(() -> new RuntimeException("Task not found!"));
 
         task.setAssignedUser(user);
         user.getTasks().add(task);

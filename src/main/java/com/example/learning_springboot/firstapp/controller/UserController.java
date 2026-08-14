@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.learning_springboot.firstapp.entity.User;
-import com.example.learning_springboot.firstapp.entity.Task;
 import com.example.learning_springboot.firstapp.service.UserService;
 
 import jakarta.validation.Valid;
@@ -40,9 +39,9 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUser(id, user));
     }
 
-    @PostMapping("/{id}/tasks")
-    public ResponseEntity<User> assignTaskToUser(@PathVariable Long id, @Valid @RequestBody Task task){
-        return ResponseEntity.ok(userService.assignTaskToUser(id, task));
+    @PostMapping("/{userId}/tasks/{taskId}")
+    public ResponseEntity<User> assignTaskToUser(@PathVariable Long userId, @PathVariable Long taskId){
+        return ResponseEntity.ok(userService.assignTaskToUser(userId, taskId));
     }
 
     @DeleteMapping("/{id}")
