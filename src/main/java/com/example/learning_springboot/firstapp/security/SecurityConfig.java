@@ -2,6 +2,7 @@ package com.example.learning_springboot.firstapp.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -27,7 +28,15 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/projects", "/api/projects/**").hasAuthority("ADMIN")                
+
+                .requestMatchers(HttpMethod.POST, "/api/projects", "/api/projects/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/projects/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/projects/**").hasAuthority("ADMIN")
+                
+                .requestMatchers(HttpMethod.POST, "/api/tasks", "/api/tasks/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/tasks/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/tasks/**").hasAuthority("ADMIN")
+                
                 .anyRequest().authenticated()
             )
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
