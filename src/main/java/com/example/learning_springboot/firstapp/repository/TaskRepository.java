@@ -1,6 +1,7 @@
 package com.example.learning_springboot.firstapp.repository;
 
 import com.example.learning_springboot.firstapp.entity.Task;
+import com.example.learning_springboot.firstapp.enums.Status;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,4 +16,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     Optional<List<Task>> findTaskByAssignedUserId(Long userId);
 
     Optional<List<Task>> findTaskByProjectId(Long projectId);
+
+    List<Task> findByStatus(Status status);
 }

@@ -3,6 +3,8 @@ package com.example.learning_springboot.firstapp.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.learning_springboot.firstapp.enums.Status;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -23,8 +25,9 @@ public class Project {
     @Size(max = 1000, message = "Description cannot exceed 1000 characters")
     private String description;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT 'In Progress...'")
-    private String status;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks = new ArrayList<>();
@@ -61,11 +64,11 @@ public class Project {
         this.description = description;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

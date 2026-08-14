@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "/api/tasks/**").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/api/tasks/**").hasAuthority("ADMIN")
 
-                .requestMatchers(HttpMethod.POST, "api/users/*/tasks/*").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/api/users/*/tasks/*").hasAuthority("ADMIN")
 
                 .anyRequest().authenticated()
             )
