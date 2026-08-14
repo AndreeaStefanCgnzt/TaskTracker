@@ -82,7 +82,7 @@ public class TaskServiceTest {
         assertEquals(taskId, result.getId());
         assertEquals("Updated Task", result.getTitle());
         assertEquals("This is an updated task.", result.getDescription());
-        assertEquals("Completed", result.getStatus());
+        assertEquals(Status.FINISHED, result.getStatus());
     }
 
     @Test

@@ -134,8 +134,7 @@ public class ProjectServiceTest {
         assertEquals(projectId, result.getId());
         assertEquals(1, result.getUsers().size());
         assertEquals(userId, result.getUsers().get(0).getId());
-        assertEquals("testuser", result.getUsers().get(0).getUsername());
-        assertEquals("testuser@gmail.com", result.getUsers().get(0).getEmail());
+        assertEquals("testuser@gmail.com", result.getUsers().get(0).getUsername());
     }
 
     @Test

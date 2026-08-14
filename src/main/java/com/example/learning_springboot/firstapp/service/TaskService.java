@@ -28,10 +28,16 @@ public class TaskService {
         return taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found!"));
     }
 
-    public List<Task> getAllTasks(Status status){
-        if (status != null) {
-            return taskRepository.findAllByStatus(status).orElseThrow(() -> new RuntimeException("Tasks not found!"));
+    public List<Task> getTasksByStatus(String status){
+        try {
+            Status enumStatus = Status.valueOf(status.toUpperCase());
+            return taskRepository.findByStatus(enumStatus).orElseThrow(() -> new RuntimeException("Tasks not found!"));
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid status");
         }
+    }
+
+    public List<Task> getAllTasks(){
         return taskRepository.findAll();
     }
 

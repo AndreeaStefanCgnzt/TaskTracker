@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.learning_springboot.firstapp.entity.Task;
@@ -44,8 +45,12 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> getAllTasks() {
-        return ResponseEntity.ok(taskService.getAllTasks(null));
+    public ResponseEntity<List<Task>> getAllTasks(@RequestParam(required = false) String status){
+        if (status != null) {
+            return ResponseEntity.ok(taskService.getTasksByStatus(status));
+        }
+        
+        return ResponseEntity.ok(taskService.getAllTasks());
     }
 
     @GetMapping("/user/{userId}")

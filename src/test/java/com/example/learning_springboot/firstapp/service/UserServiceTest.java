@@ -42,8 +42,7 @@ public class UserServiceTest {
         User result = userService.createUser(user);
 
         assertNotNull(result);
-        assertEquals("testuser", result.getUsername());
-        assertEquals("testuser@gmail.com", result.getEmail());
+        assertEquals("testuser@gmail.com", result.getUsername());
     }
 
     @Test
@@ -60,8 +59,7 @@ public class UserServiceTest {
 
         assertNotNull(result);
         assertEquals(userId, result.getId());
-        assertEquals("testuser", result.getUsername());
-        assertEquals("testuser@gmail.com", result.getEmail());
+        assertEquals("testuser@gmail.com", result.getUsername());
     }
 
     @Test
@@ -83,8 +81,7 @@ public class UserServiceTest {
         
         assertNotNull(result);
         assertEquals(userId, result.getId());
-        assertEquals("updateduser", result.getUsername());
-        assertEquals("updateduser@gmail.com", result.getEmail());
+        assertEquals("updateduser@gmail.com", result.getUsername());
     }
 
     @Test

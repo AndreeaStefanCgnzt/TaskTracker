@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.learning_springboot.firstapp.entity.Project;
 import com.example.learning_springboot.firstapp.entity.Task;
 import com.example.learning_springboot.firstapp.entity.User;
+import com.example.learning_springboot.firstapp.enums.Status;
 import com.example.learning_springboot.firstapp.repository.ProjectRepository;
 import com.example.learning_springboot.firstapp.repository.TaskRepository;
 import com.example.learning_springboot.firstapp.repository.UserRepository;
@@ -33,6 +34,15 @@ public class ProjectService {
 
     public Project getProjectById(Long id){
         return projectRepository.findById(id).orElseThrow(() -> new RuntimeException("Project not found!"));
+    }
+
+    public List<Project> getPojectsByStatus(String status){
+        try {
+            Status enumStatus = Status.valueOf(status.toUpperCase());
+            return projectRepository.findByStatus(enumStatus);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid status");
+        }
     }
 
     public List<Project> getAllProjects(){
