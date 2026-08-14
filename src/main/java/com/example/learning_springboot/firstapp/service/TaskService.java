@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.learning_springboot.firstapp.entity.Task;
+import com.example.learning_springboot.firstapp.enums.Status;
 import com.example.learning_springboot.firstapp.repository.TaskRepository;
 
 @Service
@@ -27,7 +28,10 @@ public class TaskService {
         return taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found!"));
     }
 
-    public List<Task> getAllTasks(){
+    public List<Task> getAllTasks(Status status){
+        if (status != null) {
+            return taskRepository.findAllByStatus(status).orElseThrow(() -> new RuntimeException("Tasks not found!"));
+        }
         return taskRepository.findAll();
     }
 
