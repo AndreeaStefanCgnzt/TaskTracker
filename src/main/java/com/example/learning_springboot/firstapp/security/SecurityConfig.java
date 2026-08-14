@@ -36,7 +36,9 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/tasks", "/api/tasks/**").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/api/tasks/**").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/api/tasks/**").hasAuthority("ADMIN")
-                
+
+                .requestMatchers(HttpMethod.POST, "api/users/*/tasks/*").hasAuthority("ADMIN")
+
                 .anyRequest().authenticated()
             )
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

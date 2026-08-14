@@ -3,6 +3,7 @@ package com.example.learning_springboot.firstapp.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.learning_springboot.firstapp.entity.User;
@@ -40,7 +41,11 @@ public class UserController {
     }
 
     @PostMapping("/{userId}/tasks/{taskId}")
-    public ResponseEntity<User> assignTaskToUser(@PathVariable Long userId, @PathVariable Long taskId){
+    public ResponseEntity<User> assignTaskToUser(
+            @AuthenticationPrincipal User currentUser, 
+            @PathVariable Long userId, 
+            @PathVariable Long taskId) {
+                
         return ResponseEntity.ok(userService.assignTaskToUser(userId, taskId));
     }
 
