@@ -31,7 +31,7 @@ public class TaskService {
     public List<Task> getTasksByStatus(String status){
         try {
             Status enumStatus = Status.valueOf(status.toUpperCase());
-            return taskRepository.findByStatus(enumStatus);
+            return taskRepository.findByStatus(enumStatus).orElseThrow(() -> new RuntimeException("Tasks not found!"));
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Invalid status");
         }

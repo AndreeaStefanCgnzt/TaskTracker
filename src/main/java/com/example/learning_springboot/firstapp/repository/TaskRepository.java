@@ -1,13 +1,13 @@
 package com.example.learning_springboot.firstapp.repository;
 
-import com.example.learning_springboot.firstapp.entity.Task;
-import com.example.learning_springboot.firstapp.enums.Status;
-
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.example.learning_springboot.firstapp.entity.Task;
+import com.example.learning_springboot.firstapp.enums.Status;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
@@ -17,5 +17,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     Optional<List<Task>> findTaskByProjectId(Long projectId);
 
-    List<Task> findByStatus(Status status);
+    Optional<List<Task>> findByStatus(Status status);
 }
